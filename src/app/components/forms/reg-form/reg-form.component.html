@@ -1,5 +1,5 @@
 <mat-card>
-    <form #regForm="ngForm">
+    <form #regForm="ngForm" (ngSubmit)="onSubmit(regForm)">
         <mat-form-field appearance="fill"> 
             <mat-label>Username</mat-label>
             <input
@@ -7,6 +7,7 @@
              ngModel
              #username="ngModel"
              name="username"
+             type="text"
              required
              >
              <mat-error *ngIf="username.invalid">Enter username</mat-error>
@@ -18,6 +19,7 @@
              ngModel
              #email="ngModel"
              name="email"
+             type="email"
              required
              >
              <mat-error *ngIf="email.invalid">Enter correct email adress</mat-error>
@@ -31,6 +33,7 @@
             name="password"
             minlength="3"
             required
+            type="password"
             >
             <mat-error *ngIf="pswrd.invalid">Password must have min 3 symbols</mat-error>
         </mat-form-field>
@@ -42,10 +45,15 @@
             #pswrdConfirm="ngModel"
             name="passwordConfirm"
             minlength="3"
+            type="password"
             required
             >
             <mat-error *ngIf="pswrdConfirm.invalid">Confirm password</mat-error>
         </mat-form-field>
+        <div *ngFor="let error of errors">
+            <mat-error >{{error.msg}}</mat-error>
+        </div>
+        
         <button mat-raised-button type='submit' color="accent">Sign Up</button>
     </form>
 </mat-card>
