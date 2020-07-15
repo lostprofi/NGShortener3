@@ -1,0 +1,28 @@
+<mat-card>
+    <form>
+        <mat-form-field appearance="fill"> 
+            <mat-label>Email</mat-label>
+            <input
+             matInput
+             ngModel
+             #email="ngModel"
+             name="email"
+             required
+             >
+             <mat-error *ngIf="email.invalid">Enter correct email adress</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+            matInput
+            ngModel
+            #pswrd="ngModel"
+            name="password"
+            minlength="3"
+            required
+            >
+            <mat-error *ngIf="pswrd.invalid">Enter correct password</mat-error>
+        </mat-form-field>
+        <button mat-raised-button type='submit' color="accent">Sign In</button>
+    </form>
+</mat-card>

@@ -1,0 +1,52 @@
+<mat-card>
+    <form #regForm="ngForm">
+        <mat-form-field appearance="fill"> 
+            <mat-label>Username</mat-label>
+            <input
+             matInput
+             ngModel
+             #username="ngModel"
+             name="username"
+             required
+             >
+             <mat-error *ngIf="username.invalid">Enter username</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+             matInput
+             ngModel
+             #email="ngModel"
+             name="email"
+             required
+             >
+             <mat-error *ngIf="email.invalid">Enter correct email adress</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+            matInput
+            ngModel
+            #pswrd="ngModel"
+            name="password"
+            minlength="3"
+            required
+            >
+            <mat-error *ngIf="pswrd.invalid">Password must have min 3 symbols</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+            matInput
+            ngModel
+            #pswrdConfirm="ngModel"
+            name="passwordConfirm"
+            minlength="3"
+            required
+            >
+            <mat-error *ngIf="pswrdConfirm.invalid">Confirm password</mat-error>
+        </mat-form-field>
+        <button mat-raised-button type='submit' color="accent">Sign Up</button>
+    </form>
+</mat-card>
+
