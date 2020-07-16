@@ -5,7 +5,7 @@ const User = require('../dataBase/models');
 
 const router = express.Router();
 
-router.post('/reg', [
+router.post('/reg', /*[
   check('username', 'Please enter your name').not().isEmpty(),
   check('email', 'Please enter correct e-mail adress').isEmail(),
   check('password', 'Please enter password with 6 or more symbols').isLength({ min: 6 }),
@@ -16,12 +16,12 @@ router.post('/reg', [
       return true;
     }
   }),
-], async (req, res) => {
-  const errors = validationResult(req);
+],*/ async (req, res) => {
+  /*const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.status(500).json({ errors: errors.array() });
-  }
+  }*/
 
   const {
     username, email, password,
