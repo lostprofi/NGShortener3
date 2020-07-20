@@ -10,6 +10,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { RegFormComponent } from './components/forms/reg-form/reg-form.component';
 import { AuthFormComponent } from './components/forms/auth-form/auth-form.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +18,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [

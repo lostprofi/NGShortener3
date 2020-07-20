@@ -1,3 +1,4 @@
+import { CheckUserExist } from 'src/app/classes/validation/check-user-exist';
 import { Component, OnInit } from '@angular/core';
 import { RegService } from 'src/app/services/reg/reg.service';
 import {
@@ -7,6 +8,9 @@ import {
   Validators,
   ValidationErrors,
 } from '@angular/forms';
+import { ValidationService } from 'src/app/services/validation/validation.service';
+import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-reg-form',
@@ -15,12 +19,12 @@ import {
   providers: [RegService],
 })
 export class RegFormComponent implements OnInit {
-  constructor(private regService: RegService) {}
+  constructor(private regService: RegService, private validService: ValidationService, private checkUserExist: CheckUserExist) {}
 
-  authForm: FormGroup = new FormGroup(
+  regForm: FormGroup = new FormGroup(
     {
       username: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.email, Validators.required]),
+      email: new FormControl('', [Validators.email, Validators.required], [this.checkUserExist.validate.bind(this)]),
       password: new FormControl('', [Validators.minLength(3), Validators.required]),
       passwordConfirm: new FormControl('', [Validators.required]),
     },
@@ -35,16 +39,15 @@ export class RegFormComponent implements OnInit {
       pswrdCtrlConf.setErrors({pswrdNotConf: true});
     }
 
-
     return;
   }
 
-  onSubmit(regFormData: NgForm) {
+  onSubmit() {
     const regData = {
-      username: regFormData.value.username,
-      email: regFormData.value.email,
-      password: regFormData.value.password,
-      passwordConfirm: regFormData.value.passwordConfirm,
+      username: this.regForm.value.username,
+      email: this.regForm.value.email,
+      password: this.regForm.value.password,
+      passwordConfirm: this.regForm.value.passwordConfirm,
     };
 
     this.regService.regUser(regData).subscribe(
@@ -54,10 +57,15 @@ export class RegFormComponent implements OnInit {
       }
     );
 
-    regFormData.resetForm();
+    this.regForm.reset({
+      username: {value: '', disabled: true},
+      email: {value: '', disabled: true},
+      password: {value: '', disabled: true},
+      passwordConfirm: {value: '', disabled: true},
+    });
   }
 
   ngOnInit(): void {
-    console.log(this.authForm);
+    console.log(this.regForm);
   }
 }

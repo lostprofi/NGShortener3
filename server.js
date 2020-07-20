@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 
 app.use('/', require('./backend/routes/reg'));
 app.use('/auth', require('./backend/routes/auth'));
+app.use('/validation', require('./backend/routes/validation'));
 
 app.listen(PORT, () => {
   console.log('Server started on port 5000');
