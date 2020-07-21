@@ -1,5 +1,5 @@
 <mat-card>
-  <form [formGroup]="regForm" class="example-container" (ngSubmit)="onSubmit()">
+  <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
       <mat-label>Enter your name</mat-label>
       <input matInput formControlName="username" />

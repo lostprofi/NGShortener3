@@ -2,15 +2,13 @@ import { CheckUserExist } from 'src/app/classes/validation/check-user-exist';
 import { Component, OnInit } from '@angular/core';
 import { RegService } from 'src/app/services/reg/reg.service';
 import {
-  NgForm,
   FormGroup,
   FormControl,
   Validators,
   ValidationErrors,
 } from '@angular/forms';
 import { ValidationService } from 'src/app/services/validation/validation.service';
-import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
+
 
 @Component({
   selector: 'app-reg-form',

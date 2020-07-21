@@ -11,6 +11,8 @@ router.post('/checkUserExist', async(req, res)=>{
             return res.json(true);
         }
 
+        return res.json(false);
+
     }catch(error){
         return res.status(500).json(error)
     }
