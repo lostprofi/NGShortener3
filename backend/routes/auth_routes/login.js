@@ -11,32 +11,17 @@ const router = express.Router();
 
 router.post(
   '/',
-  [
-    check('email', 'Please enter correct email').isEmail(),
-    check('password', 'Please enter password with 6 or more symbols').isLength({
-      min: 6,
-    }),
-  ],
+  
   async (req, res) => {
     try {
-      const errors = validationResult(req);
-
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
-
+      
       const { email, password, fingerprint } = req.body;
 
       const user = await User.findOne({ email });
 
-      if (!user) {
-        return res
-          .status(406)
-          .json({ errors: [{ msg: 'User is not registered' }] });
-      }
-
       const isEqlPwd = await bcrypt.compare(password, user.password);
 
+      /// отдельная валидация
       if (!isEqlPwd) {
         return res.status(406).json({ errors: [{ msg: 'Incorrect password' }] });
       }

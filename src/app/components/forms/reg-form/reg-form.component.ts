@@ -17,12 +17,12 @@ import { ValidationService } from 'src/app/services/validation/validation.servic
   providers: [RegService],
 })
 export class RegFormComponent implements OnInit {
-  constructor(private regService: RegService, private validService: ValidationService, private checkUserExist: CheckUserExist) {}
+  constructor(private regService: RegService, private checkUserExist: CheckUserExist) {}
 
   regForm: FormGroup = new FormGroup(
     {
       username: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.email, Validators.required], [this.checkUserExist.validate.bind(this)]),
+      email: new FormControl('', [Validators.email, Validators.required], [this.checkUserExist.validate.bind(this.checkUserExist)]),
       password: new FormControl('', [Validators.minLength(3), Validators.required]),
       passwordConfirm: new FormControl('', [Validators.required]),
     },
