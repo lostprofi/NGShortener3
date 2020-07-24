@@ -1,5 +1,5 @@
 <mat-card>
-  <form [formGroup]="authForm">
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput type="email" formControlName="email" />
@@ -27,8 +27,10 @@
       mat-raised-button
       type="submit"
       color="accent"
+      [disabled]="authForm.get('email').invalid || authForm.get('password').invalid"
     >
       Sign In
     </button>
+    
   </form>
 </mat-card>
