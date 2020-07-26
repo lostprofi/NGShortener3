@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class CheckAuthPswrd implements AsyncValidator {
+export class CheckAuthForm implements AsyncValidator {
   constructor(private validService: ValidationService) {}
 
   validate(authForm: FormGroup): Observable<ValidationErrors | null> {

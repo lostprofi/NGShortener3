@@ -1,8 +1,7 @@
-import { AuthCheckUser } from 'src/app/classes/validation/auth-check-user';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { CheckAuthPswrd } from '../../../classes/validation/check-auth-pswrd';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CheckAuthForm } from '../../../classes/validation/check-auth-form';
 
 @Component({
   selector: 'app-auth-form',
@@ -11,17 +10,16 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class AuthFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
-     private authCheckUser: AuthCheckUser,
-      private checkAuthPswrd: CheckAuthPswrd,
-      private authService: AuthService) { }
+              private checkAuthForm: CheckAuthForm,
+              private authService: AuthService) { }
 
   authForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: [''],
   }, {
-    asyncValidators: this.checkAuthPswrd.validate.bind(this.checkAuthPswrd),
+    asyncValidators: this.checkAuthForm.validate.bind(this.checkAuthForm),
     updateOn: 'change',
-    
+
   });
 
   onSubmit() {
