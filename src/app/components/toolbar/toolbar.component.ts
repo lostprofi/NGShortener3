@@ -19,7 +19,8 @@ export class ToolbarComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authSubscription = this.authService.checkAuth().subscribe(authResult => this.isAuth = authResult);
+        this.authSubscription = this.authService.getAuthListen().subscribe(authResult => this.isAuth = authResult);
+        this.authService.checkIsAuth();
     }
 
     ngOnDestroy(): void {

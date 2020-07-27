@@ -15,8 +15,12 @@ export class AuthService {
     
     authListen = new Subject<boolean>();
     
-    checkAuth():Subject<boolean>{
+    getAuthListen():Subject<boolean>{
         return this.authListen;
+    }
+
+    checkIsAuth(){
+        return localStorage.getItem('userToken') ? this.authListen.next(true) : this.authListen.next(false);
     }
 
     signOut(){

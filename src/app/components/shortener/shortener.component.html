@@ -1,1 +1,9 @@
-<p>shortener works!</p>
+<mat-card>
+    <form [formGroup]="cutForm">
+        <mat-form-field appearence="fill">
+            <input type="text" matInput formControlName="fullURL" placeholder="To shorten, enter URL">
+            <mat-error *ngIf="cutForm.get('fullURL').hasError('required')">Error, enter URL</mat-error>
+        </mat-form-field>
+        <button mat-raised-button type="submit">Cut</button>
+    </form>
+</mat-card>
