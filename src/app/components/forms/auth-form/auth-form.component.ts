@@ -4,28 +4,25 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CheckAuthForm } from '../../../classes/validation/check-auth-form';
 
 @Component({
-  selector: 'app-auth-form',
-  templateUrl: './auth-form.component.html',
-  styleUrls: ['./auth-form.component.css'],
+    selector: 'app-auth-form',
+    templateUrl: './auth-form.component.html',
+    styleUrls: ['./auth-form.component.css'],
 })
 export class AuthFormComponent implements OnInit {
-  constructor(private fb: FormBuilder,
-              private checkAuthForm: CheckAuthForm,
-              private authService: AuthService) { }
+    constructor(private fb: FormBuilder,
+    private checkAuthForm: CheckAuthForm,
+    private authService: AuthService) { }
 
   authForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: [''],
+      email: ['', [Validators.required, Validators.email]], password: [''],
   }, {
-    asyncValidators: this.checkAuthForm.validate.bind(this.checkAuthForm),
-    updateOn: 'change',
+      asyncValidators: this.checkAuthForm.validate.bind(this.checkAuthForm), updateOn: 'change',
 
   });
 
-  onSubmit() {
-    this.authService.authUser(this.authForm.get('email').value);
+  onSubmit():void {
+      this.authService.signIn(this.authForm.get('email').value);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 }

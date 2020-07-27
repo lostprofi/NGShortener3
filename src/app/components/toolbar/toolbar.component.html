@@ -1,7 +1,8 @@
 <mat-toolbar>
     <span>ShortUrlApp</span>
     <div>
-        <a mat-raised-button routerLink="/reg" color="accent">Sign Up</a>
-        <a mat-raised-button routerLink="/auth" color="accent">Sign In</a>
+        <a mat-raised-button routerLink="/reg" color="accent" *ngIf="!isAuth">Sign Up</a>
+        <a mat-raised-button routerLink="/auth" *ngIf="!isAuth" color="accent">Sign In</a>
+        <a mat-raised-button routerLink="/auth" *ngIf="isAuth" color="accent" (click)="signOut()">Sign Out</a>
     </div>
 </mat-toolbar>
