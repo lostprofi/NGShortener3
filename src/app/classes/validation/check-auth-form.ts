@@ -6,29 +6,29 @@ import { map, catchError } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class CheckAuthForm implements AsyncValidator {
-  constructor(private validService: ValidationService) {}
+    constructor(private validService: ValidationService) {}
 
-  validate(authForm: FormGroup): Observable<ValidationErrors | null> {
-    const email = authForm.get('email').value;
-    const password = authForm.get('password').value;
+    validate(authForm: FormGroup): Observable<ValidationErrors | null> {
+        const email = authForm.get('email').value;
+        const password = authForm.get('password').value;
 
-    return this.validService.checkEqPswrd(email, password).pipe(
-      map(
-        (validationResult) => {
-          if (validationResult === true) {
-            return null;
-          } else if (validationResult.isUserExist === false) {
-            authForm.get('email').setErrors({ userIsExist: true });
-            authForm.get('password').reset('');
+        return this.validService.checkEqPswrd(email, password).pipe(
+            map(
+                (validationResult) => {
+                    if (validationResult === true) {
+                        return null;
+                    } else if (validationResult.isUserExist === false) {
+                        authForm.get('email').setErrors({ userIsExist: true });
+                        authForm.get('password').reset('');
 
-            return;
-          } else {
-            authForm.get('password').setErrors({ isEqlPwd: true });
-            return;
-          }
-        },
-        catchError(() => of({ isEqlPwd: true }))
-      )
-    );
-  }
+                        return;
+                    } else {
+                        authForm.get('password').setErrors({ isEqlPwd: true });
+                        return;
+                    }
+                },
+                catchError(() => of({ isEqlPwd: true }))
+            )
+        );
+    }
 }

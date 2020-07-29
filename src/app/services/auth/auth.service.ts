@@ -10,16 +10,17 @@ import { Subject } from 'rxjs';
 
 export class AuthService {
     constructor(private http: HttpClient,
-              private getFingerPrint: GetFingerprintService,
-              private router: Router) { }
-    
+                private getFingerPrint: GetFingerprintService,
+                private router: Router) { }
+
     authListen = new Subject<boolean>();
-    
-    getAuthListen():Subject<boolean>{
+
+    getAuthListen(): Subject<boolean>{
         return this.authListen;
     }
 
     checkIsAuth(){
+
         return localStorage.getItem('userToken') ? this.authListen.next(true) : this.authListen.next(false);
     }
 
