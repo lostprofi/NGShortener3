@@ -6,6 +6,7 @@ import {
     FormControl,
     Validators,
     ValidationErrors,
+    FormGroupDirective,
 } from '@angular/forms';
 
 
@@ -16,7 +17,7 @@ import {
     providers: [RegService],
 })
 export class RegFormComponent implements OnInit {
-    constructor(private regService: RegService, private checkUserExist: CheckUserExist) {}
+    constructor(private _regService: RegService, private checkUserExist: CheckUserExist) {}
 
   regForm: FormGroup = new FormGroup(
       {
@@ -39,7 +40,7 @@ export class RegFormComponent implements OnInit {
       return;
   }
 
-  onSubmit() {
+  onSubmit(regFormDirective: FormGroupDirective): void {
       const regData = {
           username: this.regForm.value.username,
           email: this.regForm.value.email,
@@ -47,19 +48,14 @@ export class RegFormComponent implements OnInit {
           passwordConfirm: this.regForm.value.passwordConfirm,
       };
 
-      this.regService.regUser(regData).subscribe(
+      this._regService.regUser(regData).subscribe(
           (res) => console.log(res),
           (error) => {
               console.log(error.error.errors);
           }
       );
 
-      this.regForm.reset({
-          username: {value: '', disabled: true},
-          email: {value: '', disabled: true},
-          password: {value: '', disabled: true},
-          passwordConfirm: {value: '', disabled: true},
-      });
+      regFormDirective.resetForm();
   }
 
   ngOnInit(): void {

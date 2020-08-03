@@ -12,12 +12,13 @@ export class CheckAuthForm implements AsyncValidator {
         const email = authForm.get('email').value;
         const password = authForm.get('password').value;
 
-        return this.validService.checkEqPswrd(email, password).pipe(
+        return this.validService.checkAuthForm(email, password).pipe(
             map(
                 (validationResult) => {
+
                     if (validationResult === true) {
                         return null;
-                    } else if (validationResult.isUserExist === false) {
+                    }else if (validationResult.isUserExist === false) {
                         authForm.get('email').setErrors({ userIsExist: true });
                         authForm.get('password').reset('');
 
@@ -26,6 +27,7 @@ export class CheckAuthForm implements AsyncValidator {
                         authForm.get('password').setErrors({ isEqlPwd: true });
                         return;
                     }
+
                 },
                 catchError(() => of({ isEqlPwd: true }))
             )

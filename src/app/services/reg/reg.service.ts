@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
 import { RegData } from 'src/app/interfaces/reg-data';
 import { Observable } from 'rxjs';
 
@@ -8,7 +7,7 @@ import { Observable } from 'rxjs';
 export class RegService {
     constructor(private http: HttpClient) {}
 
-    regUser(regData: RegData): Observable<any> {
+    regUser(regData: RegData): Observable<string> {
         const body: string = JSON.stringify(regData);
 
         const options = {
@@ -19,6 +18,6 @@ export class RegService {
             params: new HttpParams().set('purpose', 'reg')
         };
 
-        return this.http.post('http://localhost:5000/reg', body, options);
+        return this.http.post<string>('http://localhost:5000/reg', body, options);
     }
 }

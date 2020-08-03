@@ -20,8 +20,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ShortenerComponent } from './components/shortener/shortener.component';
-import { ShortFormListContainerComponent } from './components/short-form-list-container/short-form-list-container.component';
-import { ShortListComponent } from './components/short-list/short-list.component';
 
 @NgModule({
     declarations: [
@@ -31,8 +29,6 @@ import { ShortListComponent } from './components/short-list/short-list.component
         RegFormComponent,
         AuthFormComponent,
         ShortenerComponent,
-        ShortFormListContainerComponent,
-        ShortListComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,16 +1,15 @@
-import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CutService {
-    constructor(private http: HttpClient) {}
+    constructor(private _http: HttpClient) {}
 
-    cutURL(control: AbstractControl): Observable<any> {
+    cutURL(control: AbstractControl) {
 
         const userToken = JSON.parse(localStorage.getItem('userToken'));
         console.log(userToken);
@@ -26,7 +25,7 @@ export class CutService {
             fullURL: control.value,
         };
 
-        return this.http.post('http://localhost:5000/shortcuts', body, options);
+        return this._http.post('http://localhost:5000/shortcuts', body, options);
     }
 
     getURLDataArr(): Observable<any>{
@@ -41,7 +40,7 @@ export class CutService {
             }),
         };
 
-        return this.http.get('http://localhost:5000/shortcuts', options);
+        return this._http.get('http://localhost:5000/shortcuts', options);
     }
 
 }
