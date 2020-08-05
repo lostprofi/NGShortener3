@@ -10,8 +10,8 @@ import { CheckAuthForm } from '../../../classes/validation/check-auth-form';
 })
 export class AuthFormComponent implements OnInit {
     constructor(private fb: FormBuilder,
-    private checkAuthForm: CheckAuthForm,
-    private authService: AuthService) { }
+                private checkAuthForm: CheckAuthForm,
+                private authService: AuthService) { }
 
   authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]], password: [''],
@@ -20,7 +20,7 @@ export class AuthFormComponent implements OnInit {
 
   });
 
-  onSubmit():void {
+  onSubmit(): void {
       this.authService.signIn(this.authForm.get('email').value);
   }
 

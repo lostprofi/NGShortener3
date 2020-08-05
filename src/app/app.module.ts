@@ -1,3 +1,4 @@
+import { CutEffects } from './store/effects/cut.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +21,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ShortenerComponent } from './components/shortener/shortener.component';
+import { StoreModule } from '@ngrx/store';
+import * as ShortenerReducer from './store/reducers/shortener.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+
 
 @NgModule({
     declarations: [
@@ -44,6 +51,9 @@ import { ShortenerComponent } from './components/shortener/shortener.component';
         MatDialogModule,
         ReactiveFormsModule,
         MatIconModule,
+        StoreModule.forRoot({currentShortUrlData: ShortenerReducer.reducer }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        EffectsModule.forRoot([CutEffects])
     ],
     providers: [
         {

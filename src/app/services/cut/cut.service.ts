@@ -9,10 +9,9 @@ import { Observable } from 'rxjs';
 export class CutService {
     constructor(private _http: HttpClient) {}
 
-    cutURL(control: AbstractControl) {
+    cutURL(fullURL: string) {
 
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        console.log(userToken);
 
         const options = {
             headers: new HttpHeaders({
@@ -21,9 +20,9 @@ export class CutService {
             }),
         };
 
-        const body = {
-            fullURL: control.value,
-        };
+        const body = JSON.stringify({
+            fullURL
+        });
 
         return this._http.post('http://localhost:5000/shortcuts', body, options);
     }
