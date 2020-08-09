@@ -1,10 +1,16 @@
 import { UrlDataObj } from './../../interfaces/shortener';
-import {createReducer, on, Action} from '@ngrx/store';
+import {createReducer, on, Action, State, createFeatureSelector} from '@ngrx/store';
 import { cutDone } from '../actions/cut.action';
 
 /*interface CurrentShortUrlData {
     currentShortUrlData: UrlDataObj[] | [];
 }*/
+
+// Selectors
+
+export const urlDataObjSelector = createFeatureSelector<State<UrlDataObj[] | []>>('currentShortUrlData');
+
+// Reducers
 
 const initialState: UrlDataObj[] | [] = [];
 

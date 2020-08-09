@@ -20,12 +20,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ShortenerComponent } from './components/shortener/shortener.component';
 import { StoreModule } from '@ngrx/store';
 import * as ShortenerReducer from './store/reducers/shortener.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { ShortUrlListComponent } from './components/short-url-list/short-url-list.component';
 
 
 @NgModule({
@@ -36,6 +39,7 @@ import { EffectsModule } from '@ngrx/effects';
         RegFormComponent,
         AuthFormComponent,
         ShortenerComponent,
+        ShortUrlListComponent,
     ],
     imports: [
         BrowserModule,
@@ -51,6 +55,8 @@ import { EffectsModule } from '@ngrx/effects';
         MatDialogModule,
         ReactiveFormsModule,
         MatIconModule,
+        MatTooltipModule,
+        MatSnackBarModule,
         StoreModule.forRoot({currentShortUrlData: ShortenerReducer.reducer }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([CutEffects])

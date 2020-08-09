@@ -1,0 +1,15 @@
+mat-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    display: inherit;
+    align-items: inherit;
+    justify-content: space-between;
+}
+
+mat-icon{
+    cursor: pointer;
+}

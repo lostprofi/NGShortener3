@@ -1,9 +1,13 @@
 form {
     padding-top: 50px;
-    width: 40%;
-    margin: 0 auto;
+    width: 50%;
 }
 
 mat-form-field {
     width: 100%;
+}
+
+mat-card {
+    display: flex;
+    justify-content: center;
 }

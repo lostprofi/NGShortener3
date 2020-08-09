@@ -11,7 +11,9 @@ import { Store } from '@ngrx/store';
 })
 export class ShortenerComponent implements OnInit {
 
-    constructor(private fb: FormBuilder, private cutService: CutService, private store: Store) { }
+    constructor(private fb: FormBuilder,
+         private cutService: CutService,
+          private store: Store) { }
 
     cutForm = this.fb.group({
         fullURL: ['', Validators.required],
