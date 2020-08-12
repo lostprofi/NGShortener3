@@ -59,4 +59,32 @@ router.get('/', tokenMdwr, async (req, res) => {
     }
 });
 
+router.get('/:urlId', async (req, res) => {
+
+    const {originalUrl} = req;
+
+    const shortenUrl = `http://localhost:5000${originalUrl}`;
+
+    try{
+
+        const urlSearchResFromDb = await User.findOne({'links.shortenURL': shortenUrl}).select('links');
+        
+        const urlDataObjArr = urlSearchResFromDb.links;
+
+        const urlDataObj = urlDataObjArr.find(el=>el.shortenURL=== shortenUrl);
+
+        if(!urlDataObj){
+            return res.status(404).json({ errors: [{ msg: 'URL not found' }] });
+        }
+
+        const {fullURL} = urlDataObj;
+        
+        res.redirect(fullURL);
+
+    }catch(error){
+        res.status(400).json({ errors: [{ msg: 'Server error' }] });
+    }
+
+});
+
 module.exports = router;

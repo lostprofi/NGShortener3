@@ -25,7 +25,7 @@ export class ShortUrlListComponent implements OnInit {
         const shortUrl = event.target.previousElementSibling.text;
         navigator.clipboard.writeText(shortUrl);
         this._snackBar.open('URL is copied');
-        setTimeout(()=>{
+        setTimeout(() => {
             this._snackBar.dismiss();
         }, 2000);
     }

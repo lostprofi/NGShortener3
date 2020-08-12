@@ -1,15 +1,17 @@
-mat-card{
+mat-card {
     display: flex;
-    align-items: center;
     justify-content: center;
+    
 }
 
-div {
-    display: inherit;
-    align-items: inherit;
-    justify-content: space-between;
+.short-url-wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 50%;
 }
 
-mat-icon{
+.mat-icon {
+    margin-left: 10px;
     cursor: pointer;
 }

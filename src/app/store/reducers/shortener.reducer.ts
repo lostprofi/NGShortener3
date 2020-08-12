@@ -17,6 +17,14 @@ const initialState: UrlDataObj[] | [] = [];
 const shortenerReducer = createReducer(initialState,
     on(cutDone, (state, { payload }) => {
 
+        console.log(payload);
+
+        const urlDataObjIsExist = state.find((el: UrlDataObj) => el.fullURL === payload.fullURL);
+
+        if (urlDataObjIsExist){
+            return state;
+        }
+
         const currentShortUrlDataClone = [...state];
 
         currentShortUrlDataClone.push(payload);

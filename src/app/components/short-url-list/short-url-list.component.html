@@ -1,18 +1,21 @@
 <mat-card *ngFor="let urlDataObj of urlDataList$|async">
-    <div >
-        <div>
-            <a href="urlDataObj.shortenURL">{{urlDataObj.shortenURL}}</a>
-            <mat-icon 
-            aria-hidden="false" 
-            aria-label="Example home icon"
-            #tooltip="matTooltip"
-            matTooltip="Copy short URL"
-            matTooltipPosition="below"
-            (click)="handleCopyClick($event)"
-            >content_copy</mat-icon>
-        </div>
-        <button mat-raised-button>Edit</button>
+    <div class="short-url-wrapper">
 
-
+            <p>{{urlDataObj.fullURL}}</p>
+            
+            <div>
+                <a href={{urlDataObj.shortenURL}}>{{urlDataObj.shortenURL}}</a>
+                <mat-icon 
+                matTooltip="Copy short URL"
+                matTooltipPosition="below"
+                (click)="handleCopyClick($event)"
+                >content_copy</mat-icon>
+            
+                <mat-icon
+                matTooltip="Add tags & desc"
+                matTooltipPosition="below"
+                >edit</mat-icon>
+            </div>
+            
     </div>
 </mat-card>
