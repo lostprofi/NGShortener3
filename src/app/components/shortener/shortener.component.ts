@@ -15,7 +15,7 @@ export class ShortenerComponent implements OnInit {
 
     cutForm = this.fb.group({
         fullURL: ['', [Validators.required, this.urlValidator]],
-    });
+    });  
 
     urlValidator(control: AbstractControl): ValidationErrors|null{
         const urlPattern = new RegExp('^(https?:\\/\\/)?' + // protocol
@@ -35,6 +35,7 @@ export class ShortenerComponent implements OnInit {
         formDirective.resetForm();
 
     }
+   
 
     ngOnInit(){
 

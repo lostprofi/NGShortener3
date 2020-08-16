@@ -29,6 +29,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ShortUrlListComponent } from './components/short-url-list/short-url-list.component';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ShortUrlListComponent } from './components/short-url-list/short-url-lis
         AuthFormComponent,
         ShortenerComponent,
         ShortUrlListComponent,
+        EditDialogComponent,
     ],
     imports: [
         BrowserModule,

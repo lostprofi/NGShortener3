@@ -1,0 +1,19 @@
+<form [formGroup]="descForm">
+    <mat-form-field>
+        <mat-label >Input</mat-label>
+        <textarea matInput  formControlName="addDesc"></textarea>
+        <mat-error *ngIf="descForm.get('addDesc').hasError('required')">Enter description</mat-error>
+        <mat-error *ngIf="descForm.get('addDesc').hasError('maxlength')">Error: max number symbols is 100</mat-error>
+    </mat-form-field>
+    
+    <button mat-raised-button type="submit">Add description</button>
+</form>
+<form [formGroup]="tagForm">
+    <mat-form-field>
+        <mat-label >Input</mat-label>
+        <textarea matInput  formControlName="tagControl"></textarea>
+    </mat-form-field>
+    <button mat-raised-button type="submit">Add tag</button>
+</form>
+
+

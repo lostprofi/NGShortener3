@@ -4,6 +4,8 @@ import { urlDataObjSelector } from 'src/app/store/reducers/shortener.reducer';
 import { Observable } from 'rxjs';
 import { UrlDataObj } from '../../interfaces/shortener';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
     selector: 'app-short-url-list',
@@ -12,9 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ShortUrlListComponent implements OnInit {
 
-    constructor(private store: Store, private _snackBar: MatSnackBar) { }
+    constructor(private store: Store, private _snackBar: MatSnackBar, private _dialog: MatDialog) { }
 
     urlDataList$: Observable<State<UrlDataObj[]>>;
+    
 
     ngOnInit(): void {
         this.urlDataList$ = this.store.pipe(select(urlDataObjSelector));
@@ -29,5 +32,13 @@ export class ShortUrlListComponent implements OnInit {
             this._snackBar.dismiss();
         }, 2000);
     }
+
+    openDialog():void{
+        this._dialog.open(EditDialogComponent,{width: '50%'});
+    }
+
+
+
+    
 
 }
