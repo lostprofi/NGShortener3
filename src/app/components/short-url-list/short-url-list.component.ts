@@ -17,7 +17,7 @@ export class ShortUrlListComponent implements OnInit {
     constructor(private store: Store, private _snackBar: MatSnackBar, private _dialog: MatDialog) { }
 
     urlDataList$: Observable<State<UrlDataObj[]>>;
-    
+
 
     ngOnInit(): void {
         this.urlDataList$ = this.store.pipe(select(urlDataObjSelector));
@@ -33,12 +33,13 @@ export class ShortUrlListComponent implements OnInit {
         }, 2000);
     }
 
-    openDialog():void{
-        this._dialog.open(EditDialogComponent,{width: '50%'});
+    openDialog(cutUrl: string): void{
+        console.log(cutUrl);
+        this._dialog.open(EditDialogComponent, {width: '50%', data: {cutUrl} });
     }
 
 
 
-    
+
 
 }

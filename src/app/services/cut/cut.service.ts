@@ -42,4 +42,35 @@ export class CutService {
         return this._http.get('http://localhost:5000/shortcuts', options);
     }
 
+    addDescription(desc: string, cutUrl: string): Observable<any>{
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        const options = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'x-auth-token': userToken,
+            }),
+        };
+
+        const body = JSON.stringify({
+            desc,
+        });
+
+        return this._http.put(cutUrl, body, options);
+    }
+
+    addTag(tagData: string, cutUrl: string): Observable<any>{
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        const options = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'x-auth-token': userToken,
+            }),
+        };
+        console.log(`${cutUrl}?tag=${tagData}`);
+
+        return this._http.put(`${cutUrl}?tag=${tagData}`, {}, options );
+    }
+
 }

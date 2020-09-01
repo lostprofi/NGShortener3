@@ -1,6 +1,6 @@
 <mat-card *ngFor="let urlDataObj of urlDataList$|async">
     <div class="short-url-wrapper">
-
+            <h1>{{urlDataObj.description}}</h1>
             <p>{{urlDataObj.fullURL}}</p>
             
             <div>
@@ -14,7 +14,7 @@
                 <mat-icon
                 matTooltip="Add tags & desc"
                 matTooltipPosition="below"
-                (click)="openDialog()"
+                (click)="openDialog(urlDataObj.shortenURL)"
                 >edit</mat-icon>
             </div>
             

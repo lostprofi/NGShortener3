@@ -65,6 +65,8 @@ router.get('/:urlId', async (req, res) => {
 
     const shortenUrl = `http://localhost:5000${originalUrl}`;
 
+    console.log(originalUrl);
+
     try{
 
         const urlSearchResFromDb = await User.findOne({'links.shortenURL': shortenUrl}).select('links');
@@ -79,11 +81,69 @@ router.get('/:urlId', async (req, res) => {
 
         const {fullURL} = urlDataObj;
         
-        res.redirect(fullURL);
+        return res.redirect(fullURL);
 
     }catch(error){
-        res.status(400).json({ errors: [{ msg: 'Server error' }] });
+        return res.status(400).json({ errors: [{ msg: 'Server error' }] });
     }
+
+});
+
+router.put('/:urlId', tokenMdwr, async(req, res)=>{
+    
+
+    if(!req.query.tag){
+        const {desc} = req.body;
+        const {originalUrl} = req;
+    
+        const shortenUrl = `http://localhost:5000${originalUrl}`;
+    
+        try{
+    
+            const urlSearchResFromDb = await User.findOne({'links.shortenURL': shortenUrl}).select('links');
+    
+            const urlDataObjFromArr = urlSearchResFromDb.links.find(urlObj=>urlObj.shortenURL === shortenUrl);
+    
+            urlDataObjFromArr.description = desc;
+    
+            await User.findOneAndUpdate({'links.shortenURL': shortenUrl},{$set: {'links':urlSearchResFromDb.links}});
+    
+            return res.status(200).json(urlDataObjFromArr);
+            
+        }catch(error){
+            res.status(400).json({ errors: [{ msg: 'Server error' }] });
+        }
+    }else{
+        try{
+            const originalUrl = req.originalUrl;
+
+            const url = originalUrl.split('?')[0];
+            
+            const shortenUrl = `http://localhost:5000${url}`;
+            const {tag} = req.query;
+            const urlSearchResFromDb = await User.findOne({'links.shortenURL': shortenUrl}).select('links');
+            const urlDataObjFromDb = urlSearchResFromDb.links.find(el=>el.shortenURL === shortenUrl);
+
+            const tagIsExist = urlDataObjFromDb.tags.find(el => el === tag);
+
+            if(tagIsExist){
+                return res.status(200).json(urlDataObjFromDb);
+            }else{
+                urlDataObjFromDb.tags.push(tag);
+
+                await User.findOneAndUpdate({'links.shortenURL': shortenUrl}, {links: urlSearchResFromDb.links});
+        
+                return res.status(200).json(urlDataObjFromDb);
+            }
+            
+            
+            
+        }catch(error){
+            res.status(400).json({ errors: [{ msg: 'Server error' }] });
+        }
+    }
+
+    
 
 });
 

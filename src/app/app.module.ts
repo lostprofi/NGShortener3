@@ -1,3 +1,5 @@
+import { AddTagEffect } from './store/effects/addTag.effect';
+import { AddDescEffect } from './store/effects/addDesc.effect';
 import { CutEffects } from './store/effects/cut.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -61,7 +63,7 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
         MatSnackBarModule,
         StoreModule.forRoot({currentShortUrlData: ShortenerReducer.reducer }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-        EffectsModule.forRoot([CutEffects])
+        EffectsModule.forRoot([CutEffects, AddDescEffect, AddTagEffect])
     ],
     providers: [
         {
